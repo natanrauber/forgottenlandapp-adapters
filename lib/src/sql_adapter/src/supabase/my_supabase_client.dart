@@ -4,17 +4,17 @@ import '../../../../adapters.dart';
 
 class MySupabaseClient implements IDatabaseClient {
   MySupabaseClient({
-    String databaseUrl = defaultDatabaseUrl,
-    String databaseKey = defaultDatabasePKey,
+    required String databaseUrl,
+    required String databaseKey,
   }) : _client = SupabaseClient(databaseUrl, databaseKey);
 
   SupabaseClient _client;
 
   @override
   void setup(String? databaseUrl, String? databaseKey) {
-    if (databaseUrl == null) print('Starting database client with default URL');
-    if (databaseUrl == null) print('Starting database client with public key');
-    _client = SupabaseClient(databaseUrl ?? defaultDatabaseUrl, databaseKey ?? defaultDatabasePKey);
+    if (databaseUrl == null) throw 'Missing required databaseUrl';
+    if (databaseKey == null) throw 'Missing required databaseKey';
+    _client = SupabaseClient(databaseUrl, databaseKey);
   }
 
   @override
